@@ -67,25 +67,20 @@ output: pdf_document
     -   Lecture du fichier regions_cas.csv
     -   Nettoyage des noms de régions et conversion de la variable date en type datetime
 
--   4.2 Création du DataFrame avec date, region, maladesparegion
+-   4.2 Convertir la variable date en type datetime, et supprimer toutes les lignes ayant des valeurs manquantes
 
-    -   Fonction pour regrouper les cas par région et par date
+    -   Convertir la variable date date en type datetime
+    -   Supprimer toutes les lignes ayant des valeurs manquantes
 
--   4.3 Estimation du paramètre λ pour la loi de Poisson
+-   4.3 Créer une fonction qui retourne un dataframe à 3 colonnes (date, region, maladesparegion). La dernière colonne contiendra le nombre de malades de covid-19 par régions aux différentes dates données
 
--   Calcul du paramètre de la distribution de Poisson
+-   4.4 Estimation de λ
 
--   4.4 Test de la loi de Poisson
+-   4.5 Utilisation d'un test statistique pour vérifier si la variable maladesparegion suit une loi de Poisson
 
-    -   Test statistique pour vérifier si maladesparegion suit une loi de Poisson
+-   4.6 Estimation de r et de p.
 
--   4.5 Estimation des paramètres r et p pour la loi binomiale négative
-
-    -   Calcul des paramètres de la distribution binomiale négative
-
--   4.6 Visualisation des données par carte
-
-    -   Fonction CarteRegions(madate) pour afficher une carte choroplèthe des régions du Sénégal avec les cas de COVID-19
+-   4.7 Création d'une fonction CarteRegions(madate) qui affiche la carte choroplèthe des régions en utilisant le nombre de malades.
 
 ***Conclusion***
 
@@ -584,7 +579,7 @@ print(f"Estimation du paramètre p : {p}")
 print(f"Estimation du paramètre r : {r}")
 ```
 
-# *4.6 Créstion de la fonction CarteRegions(madate) qui affiche la carte choroplèthe des régions en utilisant le nombre de malades*
+# *4.6 Création de la fonction CarteRegions(madate) qui affiche la carte choroplèthe des régions en utilisant le nombre de malades*
 
 *Installons les bibliotheques geopandas*
 
