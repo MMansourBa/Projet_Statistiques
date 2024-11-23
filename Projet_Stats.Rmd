@@ -2,7 +2,11 @@
 title: "Projet_Statistiques"
 author: "Mouhamadou_Mansour_BA"
 date: "2024-11-22"
-output: pdf_document
+output:
+  pdf_document:
+    latex_engine: xelatex
+extra_dependencies: ["geometry"]
+geometry: margin=1in
 ---
 
 ## **MEMBRES DU GROUPE :**
@@ -54,7 +58,7 @@ output: pdf_document
 -   3.5 Tracé de la droite de régression
     -   Ajout de la droite sur le graphique de dispersion
 -   3.6 Estimation de𝑌pour xi=21
-    -   Calcul de la valeur estimée de𝑌
+    -   Calcul de la valeur estimée de Y
 -   3.7 Calcul de l’écart
     -   Calcul de l’écart entre la valeur observée et la valeur estimée pour xi=21
 -   3.8 Vérification du passage par le point moyen t (x¯, y¯)
@@ -381,7 +385,7 @@ plt.show()
 
 *La droite de régression est correctement ajoutée au graphique de dispersion pour visualiser l’ajustement.*
 
-# *3.6 Estimation de 𝑌 pour xi=21*
+# *3.6 Estimation de Y pour xi=21*
 
 *- Calcul de la valeur estimée de*
 
@@ -448,6 +452,9 @@ print(dataframe)
 *-Nettoyage des noms de régions et mettre la première lettre en majuscule*
 
 ```{python}
+from unidecode import unidecode
+import pandas as pd
+
 # Nettoyage des noms des colonnes en enlevant les accents et les points, et en mettant la première lettre en majuscule
 dataframe.columns = [unidecode(col).replace('.', '').title() for col in dataframe.columns]
 
@@ -467,7 +474,13 @@ données_transformées.to_csv("covid_data.csv", index=False)
 
 # Afficher le contenu du fichier CSV
 print(pd.read_csv("covid_data.csv"))
+
+# Définir la variable 'tab' en tant que copie du DataFrame original
+tab = dataframe.copy()
+
+# Afficher 'tab'
 print(tab)
+
 ```
 
 # *4.2 Conversion de la variable date en type datetime et suppression de toutes les lignes ayant des valeurs manquantes (s’il en existe)*
