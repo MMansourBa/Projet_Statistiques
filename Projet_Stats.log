@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.11.23)  23 NOV 2024 02:02
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.11.23)  23 NOV 2024 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -733,18 +733,39 @@ Missing character: There is no ȳ (U+0233) in font [lmmono10-regular]:!
 
 [16]
 Missing character: There is no λ (U+03BB) in font [lmroman10-bolditalic]:mapping=tex-text;!
+Missing character: There is no λ (U+03BB) in font [lmmono10-regular]:!
+Missing character: There is no λ (U+03BB) in font [lmmono10-regular]:!
+Missing character: There is no λ (U+03BB) in font [lmmono10-italic]:!
+Missing character: There is no λ (U+03BB) in font [lmmono10-italic]:!
 
 
 [17]
-Missing character: There is no λ (U+03BB) in font [lmmono10-regular]:!
-Missing character: There is no λ (U+03BB) in font [lmmono10-regular]:!
-Missing character: There is no λ (U+03BB) in font [lmmono10-italic]:!
-Missing character: There is no λ (U+03BB) in font [lmmono10-italic]:!
-
 
 [18]
+Underfull \vbox (badness 10000) detected at line 1331
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1331
+ []
+
+
 
 [19]
+Overfull \hbox (270.49498pt too wide) in paragraph at lines 1349--1349
+[]\TU/lmtt/m/n/10 ## See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy[] 
+ []
+
+
+Overfull \hbox (270.49498pt too wide) in paragraph at lines 1349--1349
+[]\TU/lmtt/m/n/10 ## See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy[] 
+ []
+
+
+Overfull \hbox (270.49498pt too wide) in paragraph at lines 1349--1349
+[]\TU/lmtt/m/n/10 ## See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy[] 
+ []
+
 File: Projet_Stats_files/figure-latex/unnamed-chunk-27-5.pdf Graphic file (type pdf)
 <use Projet_Stats_files/figure-latex/unnamed-chunk-27-5.pdf>
 
@@ -763,10 +784,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Here is how much of TeX's memory you used:
  17209 strings out of 475993
  317848 string characters out of 5777809
- 866337 words of memory out of 5000000
+ 864337 words of memory out of 5000000
  39805 multiletter control sequences out of 15000+600000
  561683 words of font info for 72 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,6n,123p,945b,475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,6n,123p,945b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on Projet_Stats.pdf (21 pages).

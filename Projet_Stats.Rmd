@@ -5,8 +5,6 @@ date: "2024-11-22"
 output:
   pdf_document:
     latex_engine: xelatex
-extra_dependencies: ["geometry"]
-geometry: margin=1in
 ---
 
 ## **MEMBRES DU GROUPE :**
@@ -472,15 +470,6 @@ print(données_transformées)
 # Sauvegarder les données dans un fichier CSV
 données_transformées.to_csv("covid_data.csv", index=False)
 
-# Afficher le contenu du fichier CSV
-print(pd.read_csv("covid_data.csv"))
-
-# Définir la variable 'tab' en tant que copie du DataFrame original
-tab = dataframe.copy()
-
-# Afficher 'tab'
-print(tab)
-
 ```
 
 # *4.2 Conversion de la variable date en type datetime et suppression de toutes les lignes ayant des valeurs manquantes (s’il en existe)*
@@ -601,36 +590,41 @@ import geopandas as gpd
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def CarteRegions(madate, geojson_file="gadm41_SEN_1.json", data_file="covid_data.csv"):
+def CarteRegions(madate, shapefile_path="gadm41_SEN_1.shp", data_file="covid_data.csv"):
+    # Charger les données géographiques depuis le Shapefile
+    geo_data = gpd.read_file(shapefile_path)
     
-    # Charger les données géographiques
-    geo_data = gpd.read_file(geojson_file)
-
-    # Charger les données des malades
+    # Charger les données des malades depuis le fichier CSV
     data = pd.read_csv(data_file)
-
+    
     # Filtrer les données pour la date donnée
     data_date = data[data["Date"] == madate]
-
-
+    
     # Vérifier si des données existent pour la date donnée
     if data_date.empty:
         print(f"Aucune donnée disponible pour la date : {madate}")
         return
 
     # Normaliser les noms des régions
+    from unidecode import unidecode
     geo_data["Region"] = geo_data["NAME_1"].str.strip().str.title()
-    data_date.loc[:, "Region"] = data_date["Region"].str.strip().str.title()
+    geo_data["Region"] = geo_data["Region"].apply(unidecode)
+    data_date["Region"] = data_date["Region"].str.strip().str.title()
+    data_date["Region"] = data_date["Region"].apply(unidecode)
+    
+    # Correction spécifique pour "Saint Louis"
+    data_date["Region"] = data_date["Region"].replace({"Saint Louis": "Saint-Louis"})
+
     # Fusionner les données géographiques avec les données des malades
     geo_merged = geo_data.merge(data_date, on="Region", how="left")
 
     # Créer une figure pour la carte
-    fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+    fig, ax = plt.subplots(1, 1, figsize=(20, 15), dpi=200)
 
     # Tracer la carte avec les données des malades
     geo_merged.plot(
-        column="Malades",
-        cmap="YlOrRd",
+        column="Malades",  # Colonne à utiliser pour la coloration
+        cmap="YlOrRd",  # Palette de couleurs
         linewidth=0.8,
         ax=ax,
         edgecolor="black",
@@ -638,15 +632,17 @@ def CarteRegions(madate, geojson_file="gadm41_SEN_1.json", data_file="covid_data
         legend_kwds={"label": "Nombre de malades par région", "orientation": "horizontal"}
     )
 
-    # Ajouter les noms des régions
+    # Ajouter les noms des régions sur la carte
     for _, row in geo_merged.iterrows():
         if not pd.isna(row["Malades"]):  # Vérifier qu'il y a des données
+            if row["geometry"].centroid.is_empty:
+                continue
             x, y = row["geometry"].centroid.x, row["geometry"].centroid.y
             ax.annotate(
                 text=row["Region"],
                 xy=(x, y),
                 horizontalalignment="center",
-                fontsize=9,
+                fontsize=10,
                 color="black"
             )
 
@@ -659,8 +655,9 @@ def CarteRegions(madate, geojson_file="gadm41_SEN_1.json", data_file="covid_data
     # Afficher la carte
     plt.show()
 
-# Exemple d'appel de la fonction
-CarteRegions("2020-08-31")
 
+
+# Exemple d'appel de la fonction
+CarteRegions("2020-03-29", shapefile_path="gadm41_SEN_1.shp")
 
 ```
